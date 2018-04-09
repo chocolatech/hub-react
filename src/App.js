@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Search } from './search-bar/search.component';
+import { RepoList } from './repo-list/repo-list.component';
 
 class App extends Component {
+  data = [{ "name": "kot", "repo": "serious repo", "id": 1 }, { "name": "kitku", "repo": "less serious repo", "id": 2 }];
+
   render() {
+    const list = this.data.map(e => <RepoList name={e.name} repo={e.repo} key={e.id} />);
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <React.Fragment>
+        <Search />
+
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Repo</th>
+            </tr></thead>
+          <tbody>{list}</tbody>
+        </table>
+      </React.Fragment>
     );
   }
 }
