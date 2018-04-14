@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListItem} from '../list-item/list-item.component'
+import { ListItem } from '../list-item/list-item.component'
 
 export class RepoList extends React.Component {
     render() {
