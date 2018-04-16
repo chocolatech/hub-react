@@ -2,16 +2,26 @@ import React, { Component } from 'react';
 import './App.css';
 import { Search } from './search-bar/search.component';
 import { RepoList } from './repo-list/repo-list.component';
-
-const data = [{ "name": "kot", "repo": "serious repo", "id": 1 }, { "name": "kitku", "repo": "less serious repo", "id": 2 }];
+import { helper } from './helpers/http';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: [] };
+  }
 
+  getRepos() {
+    helper((body) => this.setState({ data: body }));
+  }
+
+  componentDidMount() {
+    this.getRepos();
+  }
   render() {
     return (
       <React.Fragment>
         <Search />
-        <RepoList data={data} />
+        <RepoList data={this.state.data} />
       </React.Fragment>
     );
   }
