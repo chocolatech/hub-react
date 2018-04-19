@@ -12,7 +12,7 @@ class App extends Component {
 
   getRepos() {
     const ENDPOINT = '/users/senssei/repos';
-    helper((body, ENDPOINT) => this.setState({ data: body }));
+    helper((body) => this.setState({ data: body }), ENDPOINT);
   }
 
   componentDidMount() {
