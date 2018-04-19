@@ -7,11 +7,12 @@ import { helper } from './helpers/http';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [] };
+    this.state = { data: [], username:'chocolatech' };
   }
 
   getRepos() {
-    helper((body) => this.setState({ data: body }));
+    const ENDPOINT = '/users/senssei/repos';
+    helper((body, ENDPOINT) => this.setState({ data: body }));
   }
 
   componentDidMount() {
@@ -20,7 +21,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Search />
+        <Search username={this.state.username}/>
         <RepoList data={this.state.data} />
       </React.Fragment>
     );

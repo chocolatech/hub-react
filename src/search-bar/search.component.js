@@ -5,7 +5,7 @@ export class Search extends Component {
     render() {
         return (
             <div>
-                <input/>
+                <input value = {this.props.username}/>
                 <button>Search</button>                
             </div>
         );
