@@ -5,7 +5,7 @@ export class Search extends Component {
     render() {
         return (
             <div>
-                <input value = {this.props.username}/>
+                <input value = {this.props.username} onChange={(event) => {this.props.onChange(event.target.value)}}/>
                 <button>Search</button>                
             </div>
         );
