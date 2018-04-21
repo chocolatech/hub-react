@@ -10,7 +10,7 @@ class App extends Component {
     this.state = { data: [], username:'senssei' };
   }
 
-  getRepos() {
+  getRepos = () => {
     console.log('lol', this.state.username);
     const ENDPOINT = `/users/${this.state.username}/repos`;
     helper((body) => this.setState({ data: body }), ENDPOINT);
@@ -26,7 +26,7 @@ class App extends Component {
   render() {
     return (
       <React.Fragment>
-        <Search username={this.state.username} onChange={this.getUser} onSubmit={this.getRepos}/>
+        <Search username={this.state.username} onChange={this.getUser} onSearch={this.getRepos}/>
         <RepoList data={this.state.data} />
       </React.Fragment>
     );
