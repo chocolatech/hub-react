@@ -7,11 +7,10 @@ import { helper } from './helpers/http';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], username:'senssei' };
+    this.state = { data: [], username:'' };
   }
 
   getRepos = () => {
-    console.log('lol', this.state.username);
     const ENDPOINT = `/users/${this.state.username}/repos`;
     helper((body) => this.setState({ data: body }), ENDPOINT);
   }
@@ -20,13 +19,20 @@ class App extends Component {
     this.setState({username: value})
   }
 
-  componentDidMount() {
-    this.getRepos();
+  handleEnter = (e) => {
+    if(e.key === 'Enter'){
+      this.getRepos();
+    }
   }
+
+  // componentDidMount() {
+  //   this.getRepos();
+  // }
+
   render() {
     return (
       <React.Fragment>
-        <Search username={this.state.username} onChange={this.getUser} onSearch={this.getRepos}/>
+        <Search username={this.state.username} onChange={this.getUser} onSearch={this.getRepos} onKeyPress={this.handleEnter}/>
         <RepoList data={this.state.data} />
       </React.Fragment>
     );
