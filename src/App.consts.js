@@ -1,3 +1,4 @@
 export const GET_API_DATA = 'GET_API_DATA';
 export const GET_API_DATA_LOADED = 'GET_API_DATA_LOADED';
 export const GET_API_DATA_ERROR = 'GET_API_DATA_ERROR';
+export const SET_USERNAME = 'SET_USERNAME';

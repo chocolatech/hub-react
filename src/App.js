@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-// import { Search } from './search-bar/search.component';
+import { Search } from './search-bar/search.component';
 import { RepoList } from './repo-list/repo-list.component';
 // import { helper } from './helpers/http';
 import { connect } from 'react-redux';
-import {selectApiData} from './App.selectors';
+import {selectApiData, selectUsername} from './App.selectors';
 import { bindActionCreators } from 'redux';
-import {getAPIData} from './App.actions';
+import {getAPIData, setUsername} from './App.actions';
 
 class App extends Component {
   // constructor(props) {
@@ -14,29 +14,31 @@ class App extends Component {
   //   // this.state = { data: [], username:'' };
   // }
 
-  // getRepos = () => {
-  //   const ENDPOINT = `/users/${this.state.username}/repos`;
-  //   helper((body) => this.setState({ data: body }), ENDPOINT);
-  // }
-
-  // getUser = (value) => {
-  //   this.setState({username: value})
-  // }
-
-  // handleEnter = (e) => {
-  //   if(e.key === 'Enter'){
-  //     this.getRepos();
-  //   }
-  // }
-
-  componentWillMount() {
-    this.props.actions.getAPIData('chocolatech');
+  getRepos = () => {
+    // const ENDPOINT = `/users/${this.state.username}/repos`;
+    // helper((body) => this.setState({ data: body }), ENDPOINT);
+    this.props.actions.getAPIData(this.props.username);
   }
+
+  getUser = (value) => {
+    this.props.actions.setUsername(value);
+  }
+
+  handleEnter = (e) => {
+    if(e.key === 'Enter'){
+      this.getRepos();
+    }
+  }
+
+  // componentWillMount() {
+  //   this.getRepos();
+  // }
 
   render() {
 
     return (
       <React.Fragment>
+      <Search username={this.props.username} onChange={this.getUser} onSearch={this.getRepos} onKeyPress={this.handleEnter}/>
         <RepoList data={this.props.data} />
       </React.Fragment>
     );
@@ -45,10 +47,12 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
   data: selectApiData(state),
+  username: selectUsername(state),
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators({ getAPIData }, dispatch),
+  actions: bindActionCreators({ getAPIData, setUsername }, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
