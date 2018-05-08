@@ -7,7 +7,8 @@ import {
 } from './App.consts';
 
 const initialState = fromJS({
-  apiData: null,
+  apiData: [],
+  username: '',
   apiDataLoading: null,
   apiDataLoaded: null,
   apiDataError: null,
@@ -18,7 +19,8 @@ const appReducer = (state = initialState, action) => {
     case GET_API_DATA:
       return state
         .set('apiDataLoading', true)
-        .set('apiDataError', null);
+        .set('apiDataError', null)
+        .set('username', action.username);
     case GET_API_DATA_LOADED:
       return state
         .set('apiData', action.data)

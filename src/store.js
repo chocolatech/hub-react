@@ -3,6 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import createGlobalReducer from './global-reducer';
 import globalSagas from './global-sagas';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -11,8 +12,8 @@ const middlewares = [
 ];
 
 const store = createStore(
-  createGlobalReducer(),
-  applyMiddleware(...middlewares),
+  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  createGlobalReducer(),composeWithDevTools(applyMiddleware(...middlewares))
 );
 
 sagaMiddleware.run(globalSagas);
