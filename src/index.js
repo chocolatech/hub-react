@@ -14,7 +14,7 @@ ReactDOM.render(
         <ConnectedRouter history={history}>
             <Switch>
                 <Route path="/" exact component={App} />
-                <Route path="/lol" component={Search} />
+                <Route path="/account/:username" component={App} />
             </Switch>
         </ConnectedRouter>
 

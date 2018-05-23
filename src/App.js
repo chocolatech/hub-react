@@ -14,10 +14,10 @@ class App extends Component {
   //   // this.state = { data: [], username:'' };
   // }
 
-  getRepos = () => {
+  getRepos = (username) => {
     // const ENDPOINT = `/users/${this.state.username}/repos`;
     // helper((body) => this.setState({ data: body }), ENDPOINT);
-    this.props.actions.getAPIData(this.props.username);
+    this.props.actions.getAPIData(username);
   }
 
   getUser = (value) => {
@@ -26,20 +26,19 @@ class App extends Component {
 
   handleEnter = (e) => {
     if(e.key === 'Enter'){
-      this.getRepos();
+      this.getRepos(this.props.username);
     }
   }
-
-  // componentWillMount() {
-  //   this.getRepos();
-  // }
-
+componentWillMount() {
+  const username = this.props.match.params.username || '';
+  this.getRepos(username);
+}
   render() {
-
+    console.log(this.props);
     return (
       <React.Fragment>
       <Search username={this.props.username} onChange={this.getUser} onSearch={this.getRepos} onKeyPress={this.handleEnter}/>
-        <RepoList data={this.props.data} />
+        <RepoList data={this.props.data.message ? [] : this.props.data } />
       </React.Fragment>
     );
   }
