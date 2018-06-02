@@ -2,21 +2,14 @@ import React, { Component } from 'react';
 import './App.css';
 import { Search } from './search-bar/search.component';
 import { RepoList } from './repo-list/repo-list.component';
-// import { helper } from './helpers/http';
 import { connect } from 'react-redux';
 import {selectApiData, selectUsername} from './App.selectors';
 import { bindActionCreators } from 'redux';
 import {getAPIData, setUsername} from './App.actions';
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   // this.state = { data: [], username:'' };
-  // }
 
   getRepos = () => {
-    // const ENDPOINT = `/users/${this.state.username}/repos`;
-    // helper((body) => this.setState({ data: body }), ENDPOINT);
     this.props.actions.getAPIData(this.props.username);
   }
 
@@ -29,10 +22,6 @@ class App extends Component {
       this.getRepos();
     }
   }
-
-  // componentWillMount() {
-  //   this.getRepos();
-  // }
 
   render() {
 
