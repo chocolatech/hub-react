@@ -4,7 +4,6 @@ import appReducer from './App.reducer';
 const containersReducer = {
     containers: combineReducers({
         appReducer,
-        // NOTE: put other app reducers here
     }),
 };
 
