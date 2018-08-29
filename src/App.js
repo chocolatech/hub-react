@@ -3,11 +3,12 @@ import './App.css';
 import { Search } from './search-bar/search.component';
 import { RepoList } from './repo-list/repo-list.component';
 import { helper } from './helpers/http';
+import { AppProvider, AppContext } from './AppProvider';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { data: [], username:'' };
+    this.state = { username: '' };
   }
 
   getRepos = () => {
@@ -16,11 +17,11 @@ class App extends Component {
   }
 
   getUser = (value) => {
-    this.setState({username: value})
+    this.setState({ username: value })
   }
 
   handleEnter = (e) => {
-    if(e.key === 'Enter'){
+    if (e.key === 'Enter') {
       this.getRepos();
     }
   }
@@ -31,10 +32,16 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <Search username={this.state.username} onChange={this.getUser} onSearch={this.getRepos} onKeyPress={this.handleEnter}/>
-        <RepoList data={this.state.data} />
-      </React.Fragment>
+      <AppProvider>
+        <Search username={this.state.username} onChange={this.getUser} onSearch={this.getRepos} onKeyPress={this.handleEnter} />
+
+        <AppContext.Consumer>
+          {context =>
+            <RepoList data={context.data} />
+          }
+        </AppContext.Consumer>
+
+      </AppProvider>
     );
   }
 }
